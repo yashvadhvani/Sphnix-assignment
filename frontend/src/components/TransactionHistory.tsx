@@ -22,10 +22,11 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "100%",
   },
   tableContainer: {
-    maxWidth: 800,
     marginTop: 2,
+    width: "100%",
   },
   tableHeader: {
     fontWeight: "bold",
@@ -61,15 +62,14 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ address }) => {
 
   return (
     <Box className={classes.root}>
-      <Typography variant="h5">Transaction History</Typography>
+      <Typography variant="h5" mb={2}>
+        Transaction History
+      </Typography>
+
       {loading ? (
         <CircularProgress />
       ) : (
-        <TableContainer
-          component={Paper}
-          className={classes.tableContainer}
-          sx={{ width: "100vh" }}
-        >
+        <TableContainer component={Paper} className={classes.tableContainer}>
           <Table sx={{ width: "100%" }}>
             <TableHead>
               <TableRow>
@@ -129,7 +129,7 @@ const TransactionHistory: React.FC<TransactionHistoryProps> = ({ address }) => {
                       {transaction.to}
                     </Link>
                   </TableCell>
-                  <TableCell>{parseFloat(transaction.value) / 1e18}</TableCell>
+                  <TableCell>{Number(transaction.value) / 1000000}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

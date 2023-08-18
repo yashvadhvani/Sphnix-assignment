@@ -1,10 +1,10 @@
-const backendUrl = "http://127.0.0.1:3000";
+const backendUrl = "https://careful-hare-hem.cyclic.cloud/";
 
 export const fetchAddressTransactions = async (address: string) => {
   try {
-    const response = await fetch(`${backendUrl}/transactions/${address}`);
+    const response = await fetch(`${backendUrl}/usdc/transactions/${address}`);
     const data = await response.json();
-    return data;
+    return data.usdcTransfers;
   } catch (error) {
     console.error("Error fetching transactions:", error);
     return [];

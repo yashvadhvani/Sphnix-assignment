@@ -51,42 +51,23 @@ export class AppService {
     } catch (error) {
       throw new Error('Failed to fetch transactions from etherscan API.');
     }
+  }
 
-    // const transactionsPerPage = 10; // Number of transactions to retrieve per page
-    // const latestBlockNumber = parseInt(
-    //   (await this.web3.eth.getBlockNumber()).toString(),
-    // );
-    // const startBlock = lastScannedBlock;
-    // const transactions = [];
+  async traceUSDCTransfers(address: string): Promise<any[]> {
+    const params = {
+      module: 'account',
+      action: 'tokentx',
+      contractaddress: USDC_MAIN_NETWORK_ADDRESS,
+      address: address,
+      sort: 'desc',
+      apikey: process.env.ETHERSCAN_API_KEY,
+    };
 
-    // for (let i = startBlock; i <= latestBlockNumber; i++) {
-    //   const block: any = await this.web3.eth.getBlock(i, true);
-
-    //   if (block && block.transactions && block.transactions.length > 0) {
-    //     for (const tx of block.transactions) {
-    //       if (
-    //         tx.from.toLowerCase() === address.toLowerCase() ||
-    //         (tx.to && tx.to.toLowerCase() === address.toLowerCase())
-    //       ) {
-    //         transactions.push({
-    //           hash: tx.hash,
-    //           from: tx.from,
-    //           to: tx.to,
-    //           value: this.web3.utils.fromWei(tx.value, 'ether') + ' ETH',
-    //           blockNumber: tx.blockNumber,
-    //         });
-
-    //         if (transactions.length >= transactionsPerPage * page) {
-    //           return transactions.slice(
-    //             (page - 1) * transactionsPerPage,
-    //             page * transactionsPerPage,
-    //           );
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-
-    // return transactions;
+    try {
+      const response = await axios.get(ETHERSCAN_URL, { params });
+      return response.data.result;
+    } catch (error) {
+      throw new Error(`Error fetching transfers: ${error.message}`);
+    }
   }
 }

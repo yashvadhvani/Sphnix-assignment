@@ -11,7 +11,6 @@ const Balance: React.FC<{ address: string }> = ({ address }) => {
         setLoading(true);
         const response = await fetchAddressBalance(address);
         setBalance(response);
-        console.log("LL: fetchBalance -> response", response);
       } catch (error) {
         console.error("Error fetching balance:", error);
       } finally {
@@ -29,7 +28,16 @@ const Balance: React.FC<{ address: string }> = ({ address }) => {
         <CircularProgress />
       ) : (
         balance !== null && (
-          <Typography variant="h6">Balance: {balance} USDC</Typography>
+          <Typography
+            variant="h6"
+            component="div"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            my={2}
+          >
+            Balance: {balance} USDC
+          </Typography>
         )
       )}
     </>

@@ -22,4 +22,9 @@ export class AppController {
     const transactions = await this.appService.getTransactions(address, page);
     return transactions;
   }
+  @Get('usdc/transactions/:address')
+  async listUSDCTransfers(@Param('address') address: string) {
+    const usdcTransfers = await this.appService.traceUSDCTransfers(address);
+    return { usdcTransfers };
+  }
 }
