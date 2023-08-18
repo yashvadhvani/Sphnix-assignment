@@ -1,4 +1,4 @@
-const backendUrl = "https://sphnix-backend.vercel.app";
+const backendUrl = "http://127.0.0.1:3000";
 
 export const fetchAddressTransactions = async (address: string) => {
   try {
