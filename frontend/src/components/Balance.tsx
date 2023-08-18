@@ -1,4 +1,4 @@
-import { CircularProgress, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchAddressBalance } from "../services/api.services";
 
@@ -25,7 +25,15 @@ const Balance: React.FC<{ address: string }> = ({ address }) => {
   return (
     <>
       {loading ? (
-        <CircularProgress />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
       ) : (
         balance !== null && (
           <Typography
