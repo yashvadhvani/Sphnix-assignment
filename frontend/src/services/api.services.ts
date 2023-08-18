@@ -1,4 +1,4 @@
-const backendUrl = "https://careful-hare-hem.cyclic.cloud/";
+const backendUrl = "https://careful-hare-hem.cyclic.cloud";
 
 export const fetchAddressTransactions = async (address: string) => {
   try {
